@@ -50,3 +50,8 @@ app.get('/things', (req, res)=>{
 })// end things
 
  ```
+
+ AJAX basics 
+ ===
+  in client.js:
+  -add function get things
