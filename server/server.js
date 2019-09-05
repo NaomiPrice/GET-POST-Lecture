@@ -1,6 +1,7 @@
 // requires
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 //global
 const port = 5000;
@@ -9,6 +10,7 @@ let things = [];
 things.push({name: 'bottle'});
 // uses
 app.use(express.static('server/public'));
+app.use(bodyParser.urlencoded({extended:true}));
 
 // spin up server
 app.listen(port, ()=>{
@@ -19,4 +21,10 @@ app.listen(port, ()=>{
 app.get('/things', (req, res)=>{
     console.log('in /things GET');
     res.send(things);
-})// end things
+})// end things GET
+
+app.post('/things', (req, res)=>{
+    console.log('in /things POST', req.body);
+    things.push(req.body);
+    res.send('woof');
+})// end things POST

@@ -1,5 +1,22 @@
-console.log('js');
-$(document).ready(onReady());
+
+$(document).ready(onReady);
+
+function addThing(){
+    console.log('in addThing function');
+    let objectToSend = {
+        name: $('#nameIn').val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: '/things',
+        data: objectToSend
+    }).then(function(response){
+        console.log('back from server with:', response);
+        getThings();
+    }).catch(function(err){
+        alert(err);
+    }) //end POST
+}
 
 function getThings(){
     //use AJAX to make get requwest
@@ -22,5 +39,6 @@ function getThings(){
 
 function onReady(){
     console.log('JQ');
+    $('#addThing').on('click', addThing);
     getThings();
 }
